@@ -1,0 +1,4 @@
+{
+    "mongoURI": "mongodb+srv://nabil1982:nabil1982@mernhooksapp-cspdo.mongodb.net/test?retryWrites=true&w=majority",
+    "secret": "token"
+}
