@@ -30,7 +30,6 @@ const ContactForm = () => {
     const onChange = e => setContact({ ...contact, [e.target.name]: e.target.value })
     const submit = e => {
         e.preventDefault()
-        console.log('sdlg');
         
         if (contact === null) {
         addContect(contact)
