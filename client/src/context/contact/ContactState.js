@@ -8,33 +8,34 @@ const ContactState = props => {
     const Istate = {
         contacts: [{
             id: 1,
-            name: 'contact1',
-            email: 'contact1',
-            phone: 'contact1',
+            name: 'nabil fannane',
+            email: 'nabil@gmail.com',
+            phone: '87678687',
             type:'professional'
         },
         {
             id: 2,
-            name: 'contact2',
-            email: 'contact2',
-            phone: 'contact2',
-            type:'contact2'
+            name: 'adil fannane',
+            email: 'adil@gmail.com',
+            phone: '87678687',
+            type:'professional'
             },
             {
-                id: 3,
-                name: 'contact3',
-                email: 'contact3',
-                phone: 'contact3',
-                type:'professional'
+            id: 3,
+            name: 'fatima fannane',
+            email: 'fatima@gmail.com',
+            phone: '87678687',
+            type:'professional'
             },
             {
                 id: 4,
                 name: 'contact4',
                 email: 'contact4',
                 phone: 'contact4',
-                type:'contact4'
+                type:'personal'
             }],
-        current:null
+        current: null,
+        filtred:null
     }
     const [state, dispatch] = useReducer(contactReducer, Istate)
     
@@ -65,12 +66,21 @@ const ContactState = props => {
 
     // update contact
 
-
+    const updateContact= contact => {
+        dispatch({ type:UPDATE_CONTACT,payload:contact})
+    }
 
     // filter contact
 
+    const filter= text => {
+        dispatch({ type:FILTER_CONTACT,payload:text})
+    }
+
 
     // clear filter
+    const clearFilter= () => {
+        dispatch({ type:CLEAR_FILTER})
+    }
 
 
     return (
@@ -82,7 +92,11 @@ const ContactState = props => {
                 dele,
                 current: state.current,
                 setCurrent,
-                clearCurrent
+                clearCurrent,
+                updateContact,
+                filter,
+                clearFilter,
+                filtred:state.filtred
             }}
         >
         {props.children}

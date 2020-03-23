@@ -24,7 +24,25 @@ export default (state, action)=>{
                     ...state,
                     current:null
     
-                }
+            }
+        case UPDATE_CONTACT:
+            return {
+                ...state,
+                contacts:state.contacts.map(contact=>contact.id===payload.id?payload:contact)
+            }
+        case FILTER_CONTACT:
+            return {
+                ...state,
+                filtred: state.contacts.filter(contact => {
+                    const regex=new RegExp(`${payload}`,'gi')
+                    return contact.name.match(regex) || contact.email.match(regex)
+                })
+            }
+        case CLEAR_FILTER:
+            return {
+                ...state,
+                filtred:null
+            }
         default:
             return state
     }
