@@ -1,7 +1,15 @@
-import React,{useState} from 'react'
+import React,{useState,useContext,useEffect} from 'react'
 import PropTypes from 'prop-types'
+import AlertContext from '../../context/alerts/AlterContext'
+import AuthContext from '../../context/auth/AuthContext'
 
-const Login = () => {
+
+const Login = props => {
+    const alertContext = useContext(AlertContext)
+    const authContext=useContext(AuthContext)
+    const { setAlert } = alertContext
+    const {Login,error,ClearError,isAuthenticated}=authContext
+
     const [user, setUser] = useState({
         email: '',
         password: '',
@@ -11,9 +19,26 @@ const Login = () => {
         setUser({...user,[e.target.name]:e.target.value})
     }
 
+    useEffect(() => {
+        if (isAuthenticated) {
+            props.history.push('/')
+        } 
+
+        if (error==='Invalid credentials') {
+            setAlert(error, 'danger')
+            ClearError()
+        }  
+        //eslint-disable-next-line
+       
+    },[error,isAuthenticated,props.history,setAlert, ClearError])
+
     const onSumbit = e => {
         e.preventDefault()
-    console.log('Register Submitted');
+        if (  email=== '' || password=== '') {
+            setAlert('Please Enter all fields...!!','danger')
+            } else {
+             Login({email,password})
+            }
     
     }
     
